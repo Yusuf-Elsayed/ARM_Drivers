@@ -1,6 +1,10 @@
-# Nested Vector Interrupt Controller (NVIC) Driver
+# Nested Vector Interrupt Controller (NVIC) Driver for STM32F401CCU6
 
 This repository contains an implementation of a driver for the Nested Vector Interrupt Controller (NVIC) module, which is a crucial component of ARM Cortex-M processors for handling interrupts. The driver provides functions to configure and manage interrupts, set priorities, and handle interrupt states.
+
+## Microcontroller Details
+
+The driver is developed explicitly for the ARM-based STM32F401CCU6 microcontroller, which belongs to the STM32F4 family by STMicroelectronics. This microcontroller features a powerful ARM Cortex-M4 core, offering an optimal balance between performance and power efficiency.
 
 ## Features
 
@@ -12,7 +16,7 @@ This repository contains an implementation of a driver for the Nested Vector Int
 
 ## Usage
 
-To use the NVIC driver in your project, follow these steps:
+To use the NVIC driver in your STM32F401CCU6 project, follow these steps:
 
 1. Clone or download this repository to your project directory.
 
@@ -51,7 +55,7 @@ NVIC_voidInterruptClearEnable(18);
 
 ## Configuration
 
-The `NVIC_config.h` file provides a space for any custom configuration options you might need in your project.
+The `NVIC_config.h` file provides a space for any custom configuration options you might need in your STM32F401CCU6 project.
 
 ## Author
 
