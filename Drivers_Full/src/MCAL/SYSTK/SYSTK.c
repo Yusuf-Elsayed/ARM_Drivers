@@ -1,10 +1,4 @@
-/*
- * SYSTIC.c
- *
- *  Created on: Aug 15, 2023
- *      Author: yusuf
- */
-
+/* File: SYSTIC.c */
 
 #include "../../LIB/BIT_MATHS.h"
 #include "../../LIB/STD_TYPES.h"
@@ -12,50 +6,78 @@
 #include "SYSTK_interface.h"
 #include "SYSTK_private.h"
 
-//Check CLk in config
-void STK_voidInit( void ){
-
+/** Initialize the System Timer with the specified clock source */
+void STK_voidInit(void) {
+    /* Check CLK source in configuration */
 #if CONFIG_CLKSOURCE == STK_AHB_DIV8
-		CLEAR_BIT(STK->STK_CTRL, CONFIG_CLKSOURCE);
+    CLEAR_BIT(STK->STK_CTRL, STK_CTRL_CLKSOURCE);
 #elif CONFIG_CLKSOURCE == STK_AHB
-		SET_BIT(STK->STK_CTRL, CONFIG_CLKSOURCE);
+    SET_BIT(STK->STK_CTRL, STK_CTRL_CLKSOURCE);
 #endif
-
 }
-//Check EN in config
-void STK_voidIntStatus( void ){
+
+/** Enable or disable the SysTick interrupt based on configuration */
+void STK_voidIntEnableDisable(void) {
+    /* Check ENABLE bit in configuration */
 #if SYSTICK_INT_DISABLE == DISABLE
-		CLEAR_BIT(STK->STK_CTRL, STK_CNTRL_ENABLE);
+    CLEAR_BIT(STK->STK_CTRL, STK_CNTRL_ENABLE);
 #elif SYSTICK_INT_DISABLE == ENABLE
-		SET_BIT(STK->STK_CTRL, STK_CNTRL_ENABLE);
+    SET_BIT(STK->STK_CTRL, STK_CNTRL_ENABLE);
 #endif
 }
 
-void STK_voidStart( u32 Copy_PreloadValue ){
-	STK->STK_LOAD = Copy_PreloadValue ; /* Not -1 bec. MultiMode(periodic) */
-	STK->STK_VAL = 0;
-	SET_BIT(STK->STK_CTRL, STK_CNTRL_ENABLE);
+/** Start the System Timer with a specified preload value */
+void STK_voidStart(u32 Copy_PreloadValue) {
+    STK->STK_LOAD = Copy_PreloadValue; /* Not -1 because of single mode */
+    STK->STK_VAL = 0;
+    SET_BIT(STK->STK_CTRL, STK_CNTRL_ENABLE);
 }
 
-/* 24bit so u32 */
-u32 STK_u32GetElsapsedTime( void ){
-	/* to be implemented */
+/** Get the elapsed time since the System Timer started */
+u32 STK_u32GetElapsedTime(void) {
+    return (STK->STK_LOAD - STK->STK_VAL);
 }
 
-u32 STK_u32GetReaminingTime( void ){
-	/* to be implemented */
+/** Get the remaining time for the System Timer to reach zero */
+u32 STK_u32GetRemainingTime(void) {
+    return STK->STK_VAL;
 }
 
-/* count Flag in CTRL*/
-u8 STK_u8ReadFlag( void ){
-	return GET_BIT(STK->STK_CTRL, STK_CTRL_COUNTFLAG);
+/** Read the SysTick count flag in the Control and Status Register (CTRL) */
+u8 STK_u8ReadFlag(void) {
+    return GET_BIT(STK->STK_CTRL, STK_CTRL_COUNTFLAG);
 }
-void STK_voidDelayMS( u32 Copy_u32DelayMS ){
-	/* to be implemented */
+
+/** Implement a delay in milliseconds using the System Timer */
+void STK_voidDelayMS(u32 Copy_u32DelayMS) {
+    u32 delayForMs;
+    /* let Clock = HSI (16M) */
+    if (RCC_SYSCLK == RCC_HSI) {
+        delayForMs = DELAY_FOR_MS;
+    }
+    STK_voidStart(delayForMs * Copy_u32DelayMS);
 }
-void STK_voidDelayUS( u32 Copy_u32DelayUS ){
-	/* to be implemented */
+
+/** Implement a delay in microseconds using the System Timer */
+void STK_voidDelayUS(u32 Copy_u32DelayUS) {
+    u32 delayForUs;
+    /* let Clock = HSI (16M) */
+    if (RCC_SYSCLK == RCC_HSI) {
+        delayForUs = DELAY_FOR_US;
+    }
+    STK_voidStart(delayForUs * Copy_u32DelayUS);
 }
-void STK_voidSetCallBack( void (*ptr)(void) ){
-	/* to be implemented */
+
+static void (*STK_CallBack)(void); /* Callback function pointer */
+
+/** Set a callback function to be executed when SysTick interrupt occurs */
+void STK_voidSetCallBack(void (*ptr)(void)) {
+    STK_CallBack = ptr;
+}
+
+/** SysTick Interrupt Service Routine */
+void SysTick_Handler(void) {
+    if (STK_CallBack != NULL) {
+        STK_CallBack();
+    }
 }

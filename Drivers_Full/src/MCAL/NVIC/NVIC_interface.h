@@ -33,11 +33,11 @@ u8 GLOBAL_GroupMode;
  * @brief Enumeration representing different group and subgroup configurations for NVIC priority.
  */
 typedef enum {
-    NVIC_16G_0SG = 3, /**< 16 groups, 0 subgroups (0 bits for subpriority) */
-    NVIC_8G_2SG,     /**< 8 groups, 2 subgroups (1 bit for subpriority) */
-    NVIC_4G_4SG,     /**< 4 groups, 4 subgroups (2 bits for subpriority) */
-    NVIC_2G_8SG,     /**< 2 groups, 8 subgroups (3 bits for subpriority) */
-    NVIC_0G_16SG     /**< 0 groups, 16 subgroups (4 bits for subpriority) */
+    NVIC_16G_0SG = 3, /* 16 groups, 0 subgroups (0 bits for subpriority) */
+    NVIC_8G_2SG,      /* 8 groups, 2 subgroups (1 bit for subpriority) */
+    NVIC_4G_4SG,      /* 4 groups, 4 subgroups (2 bits for subpriority) */
+    NVIC_2G_8SG,      /* 2 groups, 8 subgroups (3 bits for subpriority) */
+    NVIC_0G_16SG      /* 0 groups, 16 subgroups (4 bits for subpriority) */
 } Group_t;
 /*******************************************************************************************************************/
 

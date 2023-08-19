@@ -92,19 +92,8 @@ void EXTI_voidSetConfig(u8 copy_tLineNum, u8 copy_tGpioPortNum) {
 			break;
 		case EXTILINE_3:
 			break;
+	}
 }
-
-/**
- * @brief Set the callback function for EXTI line 0.
- *
- * This function sets the callback function for EXTI line 0.
- *
- * @param ptr Pointer to the callback function.
- */
-void EXTI0_voidCallBack(void (*ptr)(void)) {
-    EXTI0_CallBack = ptr;
-}
-
 /**
  * @brief Set the callback function for EXTI line 1.
  *
@@ -113,6 +102,18 @@ void EXTI0_voidCallBack(void (*ptr)(void)) {
  * @param ptr Pointer to the callback function.
  */
 void EXTI1_voidCallBack(void (*ptr)(void)) {
-    EXTI1_CallBack = ptr;
+	EXTI1_CallBack = ptr;
+}
+
+/**
+ * @brief EXTI1 interrupt handler.
+ *
+ * This function is the interrupt handler for EXTI line 1.
+ * It executes the registered callback function (if any) when the interrupt occurs.
+ */
+void EXTI1_IRQHandler(void) {
+	if (EXTI1_CallBack != NULL) {
+		EXTI1_CallBack();
+	}
 }
 

@@ -71,8 +71,8 @@ typedef struct {
 #define RCC_u32_PLLP6 0x00020000
 #define RCC_u32_PLLP8 0x00030000
 
-/* Main PLL division factor */
-#define RCC_u32_PLL_DIV_FACTOR_NONE 0x00000000 /* ??? */
-#define RCC_u32_PLL_DIV_FACTOR_2 0x00020000    /* VALUE of RCC_CFGR PLLXTPRE */
+///* Main PLL division factor */
+//#define RCC_u32_PLL_DIV_FACTOR_NONE 0x00000000 /* ??? */
+//#define RCC_u32_PLL_DIV_FACTOR_2 0x00020000    /* VALUE of RCC_CFGR PLLXTPRE */
 
 #endif

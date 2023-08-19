@@ -1,8 +1,8 @@
 /*
- * SYSTIC_interface.h
- *
- *  Created on: Aug 15, 2023
- *      Author: yusuf
+ * File: SYSTIC_interface.h
+ * Author: Yusuf
+ * Date: August 15, 2023
+ * Description: Interface file for System Timer (SYSTICK) module.
  */
 
 #ifndef MCAL_SYSTK_SYSTK_INTERFACE_H_
@@ -12,26 +12,37 @@
  * Bit 2: CLKSOURCE - Clock source selection
  * Bit 1: TICKINT   - SysTick exception request enable
  * Bit 0: ENABLE    - Counter enable
-*/
-//Check CLk in config
-void STK_voidInit( void );
-//Check EN in config
-void STK_voidIntStatus( void );
+ */
+/** Function to initialize the System Timer
+ * Check CLK source in configuration */
+void STK_voidInit(void);
 
-void STK_voidStart( u32 Copy_PreloadValue );
+/** Function to enable or disable the SysTick interrupt
+ * Check ENABLE bit in configuration */
+void STK_voidIntEnableDisable(void);
 
-/* 24bit so u32 */
-u32 STK_u32GetElsapsedTime( void );
+/** Function to start the System Timer with a specified preload value */
+void STK_voidStart(u32 Copy_PreloadValue);
 
-u32 STK_u32GetReaminingTime( void );
+/** Function to get the elapsed time since the System Timer started
+ * Returns a 24-bit value (u32) */
+u32 STK_u32GetElapsedTime(void);
 
-/* count Flag in CTRL*/
-u8 STK_u8ReadFlag( void );
+/** Function to get the remaining time for the System Timer to reach zero
+ * Returns a 24-bit value (u32) */
+u32 STK_u32GetRemainingTime(void);
 
-void STK_voidDelayMS( u32 Copy_u32DelayMS );
+/** Function to read the SysTick count flag in the Control and Status Register (CTRL)
+ * Returns 1 if the count flag is set, 0 if not */
+u8 STK_u8ReadFlag(void);
 
-void STK_voidDelayUS( u32 Copy_u32DelayUS );
+/** Function to implement a delay in milliseconds using the System Timer */
+void STK_voidDelayMS(u32 Copy_u32DelayMS);
 
-void STK_voidSetCallBack( void (*ptr)(void) );
+/** Function to implement a delay in microseconds using the System Timer */
+void STK_voidDelayUS(u32 Copy_u32DelayUS);
+
+/** Function to set a callback function to be executed when SysTick interrupt occurs */
+void STK_voidSetCallBack(void (*ptr)(void));
 
 #endif /* MCAL_SYSTK_SYSTK_INTERFACE_H_ */

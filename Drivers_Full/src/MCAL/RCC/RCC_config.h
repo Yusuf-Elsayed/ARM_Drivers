@@ -19,7 +19,7 @@
  * - RCC_HSE: External High-Speed oscillator
  * - RCC_PLL: Phase-Locked Loop
  */
-#define RCC_SYSCLK RCC_HSE
+#define RCC_SYSCLK RCC_HSI
 
 /**
  * @brief HSE (External High-Speed oscillator) mode selection.
@@ -47,7 +47,7 @@
  * @brief PLL input clock frequency divider (PLLM value).
  *
  * VCO input frequency = PLL input clock frequency / PLLM
- * Choose a value between 2 and 63 to be within the range of 1~2MHz.
+ * Choose a value between 2 and 63 to be within the range of 1~2MHz --> lower jitter.
  */
 #define RCC_u32_PLLM 3
 
@@ -55,7 +55,7 @@
  * @brief PLL output clock frequency multiplier (PLLN value).
  *
  * VCO output frequency = VCO input frequency x PLLN
- * Choose a value between 2 and 432 to achieve the desired VCO output frequency.
+ * Choose a value between 192 and 432 to achieve the desired VCO output frequency.
  */
 #define RCC_u32_PLLN 2
 
