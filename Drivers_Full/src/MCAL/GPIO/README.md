@@ -1,5 +1,3 @@
-Sure, there's a README.md file that you can use for your GPIO driver for the STM32F401CCU6 ARM-based microcontroller:
-
 # GPIO Driver for STM32F401CCU6
 
 This repository contains an implementation of a GPIO (General-Purpose Input/Output) driver for the STM32F401CCU6 microcontroller, which is a member of the STM32F4 family by STMicroelectronics. The driver provides functions to configure and control GPIO pins, allowing you to easily set pin modes, output types, output speeds, pull-up/pull-down resistors, and more.
