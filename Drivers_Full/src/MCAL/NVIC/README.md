@@ -63,4 +63,3 @@ This NVIC driver was developed by [Yusuf-Elsayed](https://github.com/Yusuf-Elsay
 
 ---
 
-Feel free to modify the above text to suit your project's specific details and conventions.
