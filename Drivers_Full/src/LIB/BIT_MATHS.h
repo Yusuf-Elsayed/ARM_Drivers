@@ -2,8 +2,8 @@
 #define BIT_MATH
 
 #define SET_BIT(BYTE,BIT_NUM)		(BYTE) |= (1<<(BIT_NUM))
-#define CLEAR_BIT(BYTE,BIT_NUM)		(BYTE) &=(~(1<<BIT_NUM))
-#define TGL_BIT (BYTE,BIT_NUM)	(BYTE)^=((1<<BIT_NUM))
+#define CLEAR_BIT(BYTE,BIT_NUM)		(BYTE) &= (~(1<<BIT_NUM))
+#define TGL_BIT(BYTE, BIT_NUM)  ((BYTE) ^= (1 << (BIT_NUM)))
 #define GET_BIT(BYTE,BIT_NUM)		((BYTE>>BIT_NUM)&1)
 
 #define READ_REG(REG)				((REG))

@@ -182,7 +182,9 @@ void GPIO_voidEnableAltFun(u8 Copy_u8Port, u8 Copy_u8PinNum, u8 Copy_u8AltFun);
 #define AF14 0b1110
 #define AF15 0b1111
 
-void GPIO_voidchangePinoutvalue(u8 Copy_u8Port, u8 Copy_u8PinNum, u8 Copy_u8SetOrClear);
+void GPIO_voidchangePinoutvalue(u8 Copy_u8Port, u8 Copy_u8PinNum, u8 Copy_u8SetOrClearOrTgl);
 #define GPIO_setPin 1
 #define GPIO_ClearPin 0
+#define GPIO_TGLPin 2
+
 #endif

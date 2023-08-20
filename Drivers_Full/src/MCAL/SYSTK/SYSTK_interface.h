@@ -45,4 +45,6 @@ void STK_voidDelayUS(u32 Copy_u32DelayUS);
 /** Function to set a callback function to be executed when SysTick interrupt occurs */
 void STK_voidSetCallBack(void (*ptr)(void));
 
+void MSTK_vSetInterval_periodic (u32 A_u32Ticks, void (*CallbackFunction) (void));
 #endif /* MCAL_SYSTK_SYSTK_INTERFACE_H_ */
+

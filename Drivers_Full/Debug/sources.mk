@@ -32,6 +32,7 @@ src/MCAL/EXTI \
 src/MCAL/GPIO \
 src/MCAL/NVIC \
 src/MCAL/RCC \
+src/MCAL/RTOS \
 src/MCAL/SYSTK \
 src \
 system/src/cmsis \

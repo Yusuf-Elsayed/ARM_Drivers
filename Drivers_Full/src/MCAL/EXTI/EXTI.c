@@ -82,18 +82,47 @@ void EXTI_voidSoftwareInterrupt(u8 copy_tLineNum) {
  * @param copy_tLineNum The EXTI line number to set configuration.
  * @param copy_tGpioPortNum The GPIO port for the EXTI line configuration.
  */
-void EXTI_voidSetConfig(u8 copy_tLineNum, u8 copy_tGpioPortNum) {
-	switch(copy_tLineNum){
-		case EXTILINE_0:
-			break;
-		case EXTILINE_1:
-			break;
-		case EXTILINE_2:
-			break;
-		case EXTILINE_3:
-			break;
-	}
+void EXTI_voidSetConfig(EXTI_LINE_t copy_tLineNum, u8 copy_tGpioPortNum) {
+    u32* exticr_register = NULL;  // Pointer to the appropriate EXTI configuration register
+
+    // Determine the EXTI configuration register based on the EXTI line number
+    if (copy_tLineNum < 4) {
+        exticr_register = SYSCFG_EXTICR1;
+    } else if (copy_tLineNum < 8) {
+        exticr_register = SYSCFG_EXTICR2;
+    } else if (copy_tLineNum < 12) {
+        exticr_register = SYSCFG_EXTICR3;
+    } else if (copy_tLineNum < 16) {
+        exticr_register = SYSCFG_EXTICR4;
+    } else {
+        // Invalid EXTI line number
+        return;
+    }
+
+    // Calculate the bit position within the register
+    u8 bit_position = (copy_tLineNum % 4) * 4;
+
+    // Clear the existing configuration for the specific EXTI line
+    *exticr_register &= ~(0x0F << bit_position);
+
+    // Set the new configuration based on the GPIO port
+    switch (copy_tGpioPortNum) {
+        case EXTI_PORTA:
+            *exticr_register |= (0x00 << bit_position);
+            break;
+        case EXTI_PORTB:
+            *exticr_register |= (0x01 << bit_position);
+            break;
+        case EXTI_PORTC:
+            *exticr_register |= (0x02 << bit_position);
+            break;
+        default:
+            // Invalid GPIO port
+            break;
+    }
 }
+
+
 /**
  * @brief Set the callback function for EXTI line 1.
  *

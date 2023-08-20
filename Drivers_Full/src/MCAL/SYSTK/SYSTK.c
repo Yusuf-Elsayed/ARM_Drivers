@@ -6,6 +6,10 @@
 #include "SYSTK_interface.h"
 #include "SYSTK_private.h"
 
+static void (*STK_CallBack)(void); /* Callback function pointer */
+u8 G_u8SingleFlag = 0;
+
+
 /** Initialize the System Timer with the specified clock source */
 void STK_voidInit(void) {
     /* Check CLK source in configuration */
@@ -68,7 +72,6 @@ void STK_voidDelayUS(u32 Copy_u32DelayUS) {
     STK_voidStart(delayForUs * Copy_u32DelayUS);
 }
 
-static void (*STK_CallBack)(void); /* Callback function pointer */
 
 /** Set a callback function to be executed when SysTick interrupt occurs */
 void STK_voidSetCallBack(void (*ptr)(void)) {
@@ -80,4 +83,16 @@ void SysTick_Handler(void) {
     if (STK_CallBack != NULL) {
         STK_CallBack();
     }
+}
+
+void MSTK_vSetInterval_periodic (u32 A_u32Ticks, void (*CallbackFunction) (void)){
+	/* 0- set Callback function */
+		STK_CallBack = CallbackFunction;
+		G_u8SingleFlag = 0;
+		/* 1- reset timer value */
+		STK->STK_VAL = 0;
+		/* 2- Load timer with Value */
+		STK->STK_LOAD = A_u32Ticks;
+		/*3- Start the timer */
+		SET_BIT(STK->STK_CTRL, ENABLE);
 }

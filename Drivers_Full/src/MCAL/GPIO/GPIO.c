@@ -237,19 +237,25 @@ void GPIO_voidEnableAltFun(u8 Copy_u8Port, u8 Copy_u8PinNum, u8 Copy_u8AltFun){
 }
 
 
-void GPIO_voidchangePinoutvalue(u8 Copy_u8Port, u8 Copy_u8PinNum, u8 Copy_u8SetOrClear){
-	switch(Copy_u8SetOrClear){
+void GPIO_voidchangePinoutvalue(u8 Copy_u8Port, u8 Copy_u8PinNum, u8 Copy_u8SetOrClearOrTgl){
+	switch(Copy_u8SetOrClearOrTgl){
 		case GPIO_setPin:
 			switch(Copy_u8Port){
 						case GPIO_u8PortA: SET_BIT((GPIO_A->GPIOx_ODR),Copy_u8PinNum);	break;
 						case GPIO_u8PortB: SET_BIT((GPIO_B->GPIOx_ODR),Copy_u8PinNum);	break;
 						case GPIO_u8PortC: SET_BIT((GPIO_C->GPIOx_ODR),Copy_u8PinNum);	break;
-			}
+			}break;
 		case GPIO_ClearPin:
 			switch(Copy_u8Port){
 						case GPIO_u8PortA: CLEAR_BIT((GPIO_A->GPIOx_ODR),Copy_u8PinNum);	break;
 						case GPIO_u8PortB: CLEAR_BIT((GPIO_B->GPIOx_ODR),Copy_u8PinNum);	break;
 						case GPIO_u8PortC: CLEAR_BIT((GPIO_C->GPIOx_ODR),Copy_u8PinNum);	break;
-			}
+			}break;
+			case GPIO_TGLPin:
+				switch(Copy_u8Port){
+						case GPIO_u8PortA: TGL_BIT(GPIO_A->GPIOx_ODR, Copy_u8PinNum);	break;
+						case GPIO_u8PortB: TGL_BIT(GPIO_B->GPIOx_ODR,Copy_u8PinNum);	break;
+						case GPIO_u8PortC: TGL_BIT(GPIO_C->GPIOx_ODR,Copy_u8PinNum);	break;
+			}break;
 	}
 }
