@@ -12,6 +12,9 @@ The application is developed for the ARM-based STM32F401CCU6 microcontroller. Th
 - Uses GPIO control for LED manipulation.
 - Implements a simple RTOS with LED tasks running at various periodicities.
 - Demonstrates configuring GPIO pins, creating tasks, and starting the RTOS scheduler.
+## Video Demonstration
+
+Check out this [video demonstration](https://github.com/Yusuf-Elsayed/ARM_Drivers/blob/main/Drivers_Full/src/APP/OS_App.mp4) to see the application in action!
 
 ## Usage
 
