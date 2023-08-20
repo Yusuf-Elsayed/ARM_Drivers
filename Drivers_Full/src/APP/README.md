@@ -14,7 +14,7 @@ The application is developed for the ARM-based STM32F401CCU6 microcontroller. Th
 - Demonstrates configuring GPIO pins, creating tasks, and starting the RTOS scheduler.
 ## Video Demonstration
 
-Check out this [video demonstration](https://github.com/Yusuf-Elsayed/ARM_Drivers/blob/main/Drivers_Full/src/APP/OS_App.mp4) to see the application in action!
+Check out this [video demonstration](https://github.com/Yusuf-Elsayed/ARM_Drivers/blob/main/Drivers_Full/src/APP/Rtos%20App.mp4) to see the application in action!
 
 ## Usage
 
