@@ -28,7 +28,6 @@ To use this RTOS application on your STM32F401CCU6 Black Pill, follow these step
 #include "../MCAL/GPIO/GPIO_Interface.h"
 #include "../MCAL/RCC/RCC_Interface.h"
 #include "../MCAL/SYSTK/SYSTK_interface.h"
-#include "../MCAL/GPIO/GPIO_Interface.h"
 ```
 
 3. Configure the LED GPIO pins and create LED tasks in your `main` function:
