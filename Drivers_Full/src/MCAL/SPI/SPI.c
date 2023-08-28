@@ -121,20 +121,22 @@ void SPI_voidDisable() {
  */
 void SPI_voidInterruptEnable(){
 	SET_BIT(SPI1->SPI1_CR2, TXEIE_BIT);
+	SET_BIT(SPI1->SPI1_CR2, RXNEIE_BIT);
 }
 
 /**
  * Disable Interrupt of the SPI peripheral.
  */
 void SPI_voidInterruptDisanle(){
-	SET_BIT(SPI1->SPI1_CR2, RXNEIE_BIT);
+	CLEAR_BIT(SPI1->SPI1_CR2, TXEIE_BIT);
+	CLEAR_BIT(SPI1->SPI1_CR2, RXNEIE_BIT);
 }
 
 void STK_CallBack_Func(void(*callback)(void)){
 	callbackSPI = callback;
 }
 
-void SPI1_IRQHanler(){
+void SPI1_IRQHandler(){
 	if (callbackSPI != NULL){
 		callbackSPI();
 	}
