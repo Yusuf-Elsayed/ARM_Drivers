@@ -14,6 +14,8 @@
 /**
  * Initialize the SPI1 peripheral.
  */
+
+static void (*callbackSPI) (void);
 void SPI1_voidInit() {
     /* Disable SPI1 */
     CLEAR_BIT(SPI1->SPI_CR1, SPE_BIT);
@@ -126,4 +128,14 @@ void SPI_voidInterruptEnable(){
  */
 void SPI_voidInterruptDisanle(){
 	SET_BIT(SPI1->SPI1_CR2, RXNEIE_BIT);
+}
+
+void STK_CallBack_Func(void(*callback)(void)){
+	callbackSPI = callback;
+}
+
+void SPI1_IRQHanler(){
+	if (callbackSPI != NULL){
+		callbackSPI();
+	}
 }
